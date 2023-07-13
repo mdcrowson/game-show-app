@@ -16,3 +16,8 @@ const phrases = [
     "The Road"
 ]
 
+function getRandomPhraseAsArray(arr){
+  const randomPhrase = Math.floor(Math.random() * phrases.length);
+  const chars = phrases[randomPhrase].split('');
+  return chars;
+}
