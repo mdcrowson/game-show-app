@@ -21,3 +21,28 @@ function getRandomPhraseAsArray(arr){
   const chars = phrases[randomPhrase].split('');
   return chars;
 }
+
+function addPhraseToDisplay(arr) {
+  const list = document.querySelector("#phrase ul");
+  for (let i = 0; i < arr.length; i++) {
+    const item = document.createElement('li');
+    item.textContent = arr[i];
+    list.append(item)
+    if (/^[a-zA-Z]/.test(arr[i])) {
+      item.className = "letter";
+    }
+  }
+}
+
+// function addPhraseToDisplay(arr) {
+//   const list = document.querySelector("#phrase ul");
+//   for (let i = 0; i < arr.length; i++) {
+//     list.insertAdjacentHTML (
+//       'beforeend',
+//       `<li>${arr[i]}</li>`
+//     );
+//   }
+// }
+
+const phraseArray = getRandomPhraseAsArray(phrases);
+addPhraseToDisplay(phraseArray);
