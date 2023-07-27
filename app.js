@@ -1,8 +1,8 @@
 const qwerty = document.getElementById('qwerty');
 const phrase = document.getElementById('phrase');
 let missed = 0;
-const start = document.querySelector('.btn__reset');
 
+const start = document.querySelector('.btn__reset');
 start.addEventListener('click', (e) => {
     const overlay = document.getElementById('overlay');
     overlay.style.display = 'none';
@@ -40,18 +40,19 @@ addPhraseToDisplay(phraseArray);
 
 
 function checkLetter(btn) {
-  const letter = getElementsByClassName("letter");
+  const letter = document.getElementsByClassName("letter");
   for (i=0; i < letter.length; i++) {
-    if (letter[i] === btn.textContent) {
+    if (letter[i].textContent === btn.textContent) {
       letter[i].className = "letter show";
-      const match = letter[i];
+      const match = letter[i].textContent;
+      return match;
     }
-  }
-  if (match) {
-    return match;
-  } else {
-    return null;
-    }
+  } return null;
+  // if (match) {
+  //   return match;
+  // } else {
+  //   return null;
+  //   }
 
 }
 
@@ -67,6 +68,9 @@ keyboard.addEventListener('click', (evt) => {
   button.className = 'chosen';
   button.setAttribute('disabled', true);
   button.setAttribute('autocomplete', 'off');
+
+  const letterFound = checkLetter(button);
+  console.log(letterFound);
 });
 
 
