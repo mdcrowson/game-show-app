@@ -1,10 +1,13 @@
 const qwerty = document.getElementById('qwerty');
 const phrase = document.getElementById('phrase');
+const list = document.querySelector("#phrase ul");
+const letterAmount = document.getElementsByClassName('letter').length;
+const shownLetterAmount = document.getElementsByClassName('show').length;
+const overlay = document.getElementById('overlay');
 let missed = 0;
 
 const start = document.querySelector('.btn__reset');
-start.addEventListener('click', (e) => {
-    const overlay = document.getElementById('overlay');
+start.addEventListener('click', (e) => { 
     overlay.style.display = 'none';
 });
 
@@ -23,7 +26,7 @@ function getRandomPhraseAsArray(arr){
 }
 
 function addPhraseToDisplay(arr) {
-  const list = document.querySelector("#phrase ul");
+  
   for (let i = 0; i < arr.length; i++) {
     const item = document.createElement('li');
     item.textContent = arr[i];
@@ -48,18 +51,20 @@ function checkLetter(btn) {
       return match;
     }
   } return null;
-  // if (match) {
-  //   return match;
-  // } else {
-  //   return null;
-  //   }
 
 }
 
+function checkWin() {
+  if (letterAmount === shownLetterAmount) {
+    overlay.className = 'win';
+    overlay.style.display = 'show';
+  } else if (missed >= 5) {
+    overlay.className = 'lose';
+    overlay.style.display = 'show';
+  } 
+}
 
-
-const keyboard = document.querySelector('#qwerty');
-keyboard.addEventListener('click', (evt) => {
+qwerty.addEventListener('click', (evt) => {
   const isButton = evt.target.nodeName === 'BUTTON';
   if (!isButton) {
     return;
@@ -70,7 +75,18 @@ keyboard.addEventListener('click', (evt) => {
   button.setAttribute('autocomplete', 'off');
 
   const letterFound = checkLetter(button);
-  console.log(letterFound);
+  
+
+  if (letterFound === null) {
+    const heart = document.getElementsByClassName('tries')[missed].querySelector('img');
+    heart.src = "images/lostHeart.png";
+    missed +=1;
+    console.log(missed);
+
+}
+
+checkWin()
+
 });
 
 
