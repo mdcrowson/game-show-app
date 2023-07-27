@@ -1,9 +1,10 @@
 const qwerty = document.getElementById('qwerty');
 const phrase = document.getElementById('phrase');
 const list = document.querySelector("#phrase ul");
-const letterAmount = document.getElementsByClassName('letter').length;
-const shownLetterAmount = document.getElementsByClassName('show').length;
+
 const overlay = document.getElementById('overlay');
+const overlayHeader = overlay.querySelector('h2');
+const overlayButton = overlay.querySelector('a');
 let missed = 0;
 
 const start = document.querySelector('.btn__reset');
@@ -45,7 +46,7 @@ addPhraseToDisplay(phraseArray);
 function checkLetter(btn) {
   const letter = document.getElementsByClassName("letter");
   for (i=0; i < letter.length; i++) {
-    if (letter[i].textContent === btn.textContent) {
+    if (letter[i].textContent.toLowerCase() === btn.textContent) {
       letter[i].className = "letter show";
       const match = letter[i].textContent;
       return match;
@@ -54,13 +55,21 @@ function checkLetter(btn) {
 
 }
 
+
 function checkWin() {
+  const letterAmount = document.getElementsByClassName('letter').length;
+  const shownLetterAmount = document.getElementsByClassName('show').length;
   if (letterAmount === shownLetterAmount) {
     overlay.className = 'win';
-    overlay.style.display = 'show';
+    overlay.style.display = '';
+    overlayHeader.textContent = "You Won!";
+    overlayButton.textContent = "Play Again";
   } else if (missed >= 5) {
     overlay.className = 'lose';
-    overlay.style.display = 'show';
+    overlay.style.display = '';
+    overlayHeader.textContent = "You Lost";
+    overlayButton.textContent = "Play Again";
+
   } 
 }
 
@@ -78,10 +87,12 @@ qwerty.addEventListener('click', (evt) => {
   
 
   if (letterFound === null) {
-    const heart = document.getElementsByClassName('tries')[missed].querySelector('img');
-    heart.src = "images/lostHeart.png";
-    missed +=1;
-    console.log(missed);
+    if (missed < 5) {
+      const heart = document.getElementsByClassName('tries')[missed].querySelector('img');
+      heart.src = "images/lostHeart.png";
+      missed +=1;
+      console.log(missed);
+    }
 
 }
 
