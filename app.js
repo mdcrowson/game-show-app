@@ -43,7 +43,7 @@ function checkLetter(btn) {
   const letter = getElementsByClassName("letter");
   for (i=0; i < letter.length; i++) {
     if (letter[i] === btn.textContent) {
-      letter[i].className = "letter show"
+      letter[i].className = "letter show";
       const match = letter[i];
     }
   }
@@ -54,6 +54,20 @@ function checkLetter(btn) {
     }
 
 }
+
+
+
+const keyboard = document.querySelector('#qwerty');
+keyboard.addEventListener('click', (evt) => {
+  const isButton = evt.target.nodeName === 'BUTTON';
+  if (!isButton) {
+    return;
+  }
+  const button = evt.target;
+  button.className = 'chosen';
+  button.setAttribute('disabled', true);
+  button.setAttribute('autocomplete', 'off');
+});
 
 
 
