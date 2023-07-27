@@ -34,15 +34,29 @@ function addPhraseToDisplay(arr) {
   }
 }
 
-// function addPhraseToDisplay(arr) {
-//   const list = document.querySelector("#phrase ul");
-//   for (let i = 0; i < arr.length; i++) {
-//     list.insertAdjacentHTML (
-//       'beforeend',
-//       `<li>${arr[i]}</li>`
-//     );
-//   }
-// }
 
 const phraseArray = getRandomPhraseAsArray(phrases);
 addPhraseToDisplay(phraseArray);
+
+
+function checkLetter(btn) {
+  const letter = getElementsByClassName("letter");
+  for (i=0; i < letter.length; i++) {
+    if (letter[i] === btn.textContent) {
+      letter[i].className = "letter show"
+      const match = letter[i];
+    }
+  }
+  if (match) {
+    return match;
+  } else {
+    return null;
+    }
+
+}
+
+
+
+
+
+
