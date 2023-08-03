@@ -34,6 +34,8 @@ function addPhraseToDisplay(arr) {
     list.append(item)
     if (/^[a-zA-Z]/.test(arr[i])) {
       item.className = "letter";
+    } else {
+      item.className = "space";
     }
   }
 }
@@ -44,14 +46,21 @@ addPhraseToDisplay(phraseArray);
 
 
 function checkLetter(btn) {
-  const letter = document.getElementsByClassName("letter");
-  for (i=0; i < letter.length; i++) {
-    if (letter[i].textContent.toLowerCase() === btn.textContent) {
-      letter[i].className = "letter show";
-      const match = letter[i].textContent;
-      return match;
+  const letters = document.getElementsByClassName("letter");
+  let match = "";
+  for (i=0; i < letters.length; i++) {
+    let letter = letters[i].textContent;
+    if (letter.toLowerCase() === btn.textContent) {
+      letters[i].className = "letter show";
+      match = letter;
     }
-  } return null;
+  }
+    if(/^[a-zA-Z]/.test(match)){
+      return match;
+    } else {
+      return null;
+    }
+  
 
 }
 
