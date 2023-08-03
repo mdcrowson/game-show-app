@@ -92,10 +92,12 @@ button {
   width: 15px;
 }
 
-.show {
+.letter.show {
   color: #000;
   background-color: #76CE82;
+  animation: loader 0.25s 1;
 }
+
 
 /* Keyboard */
 
@@ -160,4 +162,18 @@ button {
 
 .lose a {
   color: var(--color-lose);
+}
+
+/* Animation Keyframes */
+
+@keyframes loader {
+  0% {
+     rotate: 0deg;
+  }
+  50% {
+    rotate: -8deg;
+  }
+  100% {
+    rotate: 3deg;
+  }
 }
