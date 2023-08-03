@@ -8,6 +8,8 @@ const overlayHeader = overlay.querySelector('h2');
 const overlayButton = overlay.querySelector('a');
 let missed = 0;
 
+const tries = document.getElementsByClassName('tries');
+
 const start = document.querySelector('.btn__reset');
 start.addEventListener('click', (e) => { 
     missed = 0;  
@@ -21,9 +23,15 @@ start.addEventListener('click', (e) => {
         key.removeAttribute('autocomplete');
       }
     }
-    overlay.style.display = 'none';
+    for (let i=0; i < tries.length; i++) {
+      let life = tries[i].querySelector('img');
+      if (life.src = "images/lostHeart.png") {
+        life.src = "images/liveHeart.png";
+      }
+    }
     const phraseArray = getRandomPhraseAsArray(phrases);
     addPhraseToDisplay(phraseArray);
+    overlay.style.display = 'none';
     
 });
 
@@ -91,12 +99,10 @@ function checkWin() {
       overlayButton.textContent = "Play Again";
     }, 250);
   } else if (missed >= 5) {
-    setTimeout( () => {
       overlay.className = 'lose';
       overlay.style.display = '';
       overlayHeader.textContent = "You Lost";
       overlayButton.textContent = "Play Again";
-    }, 250);
   } 
 }
 
@@ -115,10 +121,9 @@ qwerty.addEventListener('click', (evt) => {
 
   if (letterFound === null) {
     if (missed < 5) {
-      const tries = document.getElementsByClassName('tries')[missed].querySelector('img');
-      tries.src = "images/lostHeart.png";
+      const heart = tries[missed].querySelector('img');
+      heart.src = "images/lostHeart.png";
       missed +=1;
-      console.log(missed);
     }
 
 }
