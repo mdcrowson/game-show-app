@@ -1,3 +1,4 @@
+// Variables //
 const qwerty = document.getElementById('qwerty');
 const keyboard = qwerty.querySelectorAll('button');
 const phrase = document.getElementById('phrase');
@@ -5,12 +6,12 @@ const list = document.querySelector("#phrase ul");
 
 const overlay = document.getElementById('overlay');
 const overlayHeader = overlay.querySelector('h2');
-const overlayButton = overlay.querySelector('a');
-let missed = 0;
+const start = document.querySelector('.btn__reset');
+let missed
 
 const tries = document.getElementsByClassName('tries');
 
-const start = document.querySelector('.btn__reset');
+// Begin and Reset Game Event Listener //
 start.addEventListener('click', (e) => { 
     missed = 0;  
     while( list.firstChild ){
@@ -35,6 +36,8 @@ start.addEventListener('click', (e) => {
     
 });
 
+
+// Game Functions //
 const phrases = [
     "Pride and Prejudice",
     "Catcher in the Rye",
@@ -49,8 +52,7 @@ function getRandomPhraseAsArray(arr){
   return chars;
 }
 
-function addPhraseToDisplay(arr) {
-  
+function addPhraseToDisplay(arr) { 
   for (let i = 0; i < arr.length; i++) {
     const item = document.createElement('li');
     item.textContent = arr[i];
@@ -62,10 +64,6 @@ function addPhraseToDisplay(arr) {
     }
   }
 }
-
-
-// const phraseArray = getRandomPhraseAsArray(phrases);
-// addPhraseToDisplay(phraseArray);
 
 
 function checkLetter(btn) {
@@ -87,7 +85,6 @@ function checkLetter(btn) {
 
 }
 
-
 function checkWin() {
   const letterAmount = document.getElementsByClassName('letter').length;
   const shownLetterAmount = document.getElementsByClassName('show').length;
@@ -96,16 +93,18 @@ function checkWin() {
       overlay.className = 'win';
       overlay.style.display = '';
       overlayHeader.textContent = "You Won!";
-      overlayButton.textContent = "Play Again";
+      start.textContent = "Play Again";
     }, 250);
   } else if (missed >= 5) {
       overlay.className = 'lose';
       overlay.style.display = '';
       overlayHeader.textContent = "You Lost";
-      overlayButton.textContent = "Play Again";
+      start.textContent = "Play Again";
   } 
 }
 
+
+// Keyboard Event Listener & Check Win //
 qwerty.addEventListener('click', (evt) => {
   const isButton = evt.target.nodeName === 'BUTTON';
   if (!isButton) {
