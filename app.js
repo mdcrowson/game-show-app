@@ -69,16 +69,19 @@ function checkWin() {
   const letterAmount = document.getElementsByClassName('letter').length;
   const shownLetterAmount = document.getElementsByClassName('show').length;
   if (letterAmount === shownLetterAmount) {
-    overlay.className = 'win';
-    overlay.style.display = '';
-    overlayHeader.textContent = "You Won!";
-    overlayButton.textContent = "Play Again";
+    setTimeout( () => {
+      overlay.className = 'win';
+      overlay.style.display = '';
+      overlayHeader.textContent = "You Won!";
+      overlayButton.textContent = "Play Again";
+    }, 250);
   } else if (missed >= 5) {
-    overlay.className = 'lose';
-    overlay.style.display = '';
-    overlayHeader.textContent = "You Lost";
-    overlayButton.textContent = "Play Again";
-
+    setTimeout( () => {
+      overlay.className = 'lose';
+      overlay.style.display = '';
+      overlayHeader.textContent = "You Lost";
+      overlayButton.textContent = "Play Again";
+    }, 250);
   } 
 }
 
