@@ -1,4 +1,5 @@
 const qwerty = document.getElementById('qwerty');
+const keyboard = qwerty.querySelectorAll('button');
 const phrase = document.getElementById('phrase');
 const list = document.querySelector("#phrase ul");
 
@@ -9,7 +10,21 @@ let missed = 0;
 
 const start = document.querySelector('.btn__reset');
 start.addEventListener('click', (e) => { 
+    missed = 0;  
+    while( list.firstChild ){
+      list.removeChild( list.firstChild );
+    }
+    for (let key of keyboard) {
+      if (key.className = 'chosen') {
+        key.classList.remove('chosen');
+        key.removeAttribute('disabled');
+        key.removeAttribute('autocomplete');
+      }
+    }
     overlay.style.display = 'none';
+    const phraseArray = getRandomPhraseAsArray(phrases);
+    addPhraseToDisplay(phraseArray);
+    
 });
 
 const phrases = [
@@ -41,8 +56,8 @@ function addPhraseToDisplay(arr) {
 }
 
 
-const phraseArray = getRandomPhraseAsArray(phrases);
-addPhraseToDisplay(phraseArray);
+// const phraseArray = getRandomPhraseAsArray(phrases);
+// addPhraseToDisplay(phraseArray);
 
 
 function checkLetter(btn) {
@@ -100,8 +115,8 @@ qwerty.addEventListener('click', (evt) => {
 
   if (letterFound === null) {
     if (missed < 5) {
-      const heart = document.getElementsByClassName('tries')[missed].querySelector('img');
-      heart.src = "images/lostHeart.png";
+      const tries = document.getElementsByClassName('tries')[missed].querySelector('img');
+      tries.src = "images/lostHeart.png";
       missed +=1;
       console.log(missed);
     }
